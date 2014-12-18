@@ -16,6 +16,9 @@ namespace VQStore
     {
         protected void Application_Start()
         {
+            //Forces server to accept only HTTPS. Turn ON after install certificates
+            //GlobalFilters.Filters.Add(new RequireHttpsAttribute());
+
             AreaRegistration.RegisterAllAreas();
 
             WebApiConfig.Register(GlobalConfiguration.Configuration);
