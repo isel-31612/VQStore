@@ -81,6 +81,17 @@ namespace VQStore.Controllers
                 {
                     WebSecurity.CreateUserAndAccount(model.UserName, model.Password);
                     WebSecurity.Login(model.UserName, model.Password);
+
+
+                    using (UsersContext context = new UsersContext())
+                    {
+                        UserProfile user = context.UserProfiles.Single(u => u.UserName == model.UserName);
+                        VQProfile vqprofile = new VQProfile() { profile = user, submissions = new List<VQProject>(), previews = new List<VQProjectView>() };
+                        context.VQUsers.Add(vqprofile);
+                        context.SaveChanges();
+                        
+                    }
+
                     return RedirectToAction("Index", "Home");
                 }
                 catch (MembershipCreateUserException e)

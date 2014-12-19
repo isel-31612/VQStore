@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using VQStore.Models;
 
 namespace VQStore
 {
@@ -18,6 +20,12 @@ namespace VQStore
         {
             //Forces server to accept only HTTPS. Turn ON after install certificates
             //GlobalFilters.Filters.Add(new RequireHttpsAttribute());
+
+            Database.SetInitializer(new CreateDatabaseIfNotExists<UsersContext>());
+
+            using(UsersContext context = new UsersContext()){
+                context.VQUsers.Count();
+            }
 
             AreaRegistration.RegisterAllAreas();
 

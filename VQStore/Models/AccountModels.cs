@@ -16,6 +16,9 @@ namespace VQStore.Models
         }
 
         public DbSet<UserProfile> UserProfiles { get; set; }
+        public DbSet<VQProfile> VQUsers { get; set; }
+        public DbSet<VQProjectView> VQProjectViews { get; set; }
+        public DbSet<VQProject> VQProjects { get; set; }
     }
 
     [Table("UserProfile")]
@@ -25,6 +28,8 @@ namespace VQStore.Models
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
         public int UserId { get; set; }
         public string UserName { get; set; }
+
+        public virtual List<VQProfile> profile { get; set; }
     }
 
     public class RegisterExternalLoginModel
